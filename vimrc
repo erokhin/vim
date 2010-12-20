@@ -15,16 +15,14 @@ call pathogen#helptags()
 
 let g:SuperTabCrMapping = 0
 
-
 " Remove the nasty windows endline
 map MM :%s/\r/\r/g
 
 " Set Modification date by me
 map \d :<C-u> call SetDateComment()<CR>
 
-" Syntax and colorscheme  
+" Syntax  
 syntax on
-colorscheme whamoocolor
 
 " Set map leader
 let mapleader = ","
@@ -59,21 +57,21 @@ let g:fuf_mrufile_maxItem = 300
 let g:fuf_mrucmd_maxItem = 400
 
 """ behaviour settings
-set ch=2           " Make command line two lines high
-set mousehide      " Hide the mouse when typing text
+set ch=2            " Make command line two lines high
+set mousehide       " Hide the mouse when typing text
 
-set showcmd        " Show partial command in status bar
-set nocompatible   " allow breaking vanilla vi compatibility
-set showmatch      " Highlight the matches of the last search
-set backspace=2    " allow backspacing over everything in insert mode
-set autoindent     " always set autoindenting on
-set textwidth=0    " Don't wrap words by default
-set cursorline     " I Want to see where i'm!!
-set wildmenu       " Set enhanced comand menu' completion
-set history=1000   " Vim now will remember 1000 commands
-set autochdir      " automatically switch working path to the edited file
+set showcmd         " Show partial command in status bar
+set nocompatible    " allow breaking vanilla vi compatibility
+set showmatch       " Highlight the matches of the last search
+set backspace=2     " allow backspacing over everything in insert mode
+set autoindent      " always set autoindenting on
+set textwidth=0     " Don't wrap words by default
+set cursorline      " I Want to see where i'm!!
+set wildmenu        " Set enhanced comand menu' completion
+set history=1000    " Vim now will remember 1000 commands
+set undolevels=1000 " use many levels of undo
+set autochdir       " automatically switch working path to the edited file
 set sessionoptions=blank,buffers,curdir,folds,help,options,tabpages,winsize,resize
-
 
 " No blink cursor
 set guicursor=a:blinkon0
@@ -100,7 +98,6 @@ set foldlevel=100 " Don't autofold anything (but I can still fold manually)
 "set foldopen-=search " don't open folds when you search into them
 "set foldopen-=undo " don't open folds when you undo stuff
 
-
 " Bells management
 set noerrorbells   " 
 set visualbell     " 
@@ -109,7 +106,6 @@ set vb t_vb=       " Set visualbell not orrible beep
 " status bar setting
 set laststatus=2   " Always show the status line 
 set statusline=%1*%y\ %t%=\ %l-%c\ [%n]\ %p%\%
-
 
 filetype on            " enables filetype detection
 filetype plugin on     " enables filetype specific plugins
@@ -147,7 +143,7 @@ autocmd FileType html set ft=htmldjango.html " For SnipMate
 autocmd FileType htmldjango set ft=htmldjango.html " For SnipMate
 
 " NERD_tree config
-let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$'] " '\.vim$'
 let NERDTreeShowBookmarks=1
 let NERDTreeChDirMode=2
 
@@ -215,7 +211,7 @@ autocmd BufNewFile *.py call append(2, "'''")
 autocmd BufNewFile *.py call append(3, "Doc for this file")
 autocmd BufNewFile *.py call append(4, "'''")
 autocmd BufNewFile *.py call append(5, "__version__ = \"0.1\"")
-autocmd BufNewFile *.py call append(6, "__author__ = \"Matteo Rattotti\"")
+autocmd BufNewFile *.py call append(6, "__author__ = \"Konstantin V. Erokhin\"")
 autocmd BufNewFile *.py call append(7, "__contact__ = \"http://www.shinyfrog.net\"")
 autocmd BufNewFile *.py call append(8, "__date__ = '" . strftime("%c") ."'")
 autocmd BufNewFile *.py call append(9, "__timestamp__ = '" . localtime() ."'")
@@ -232,8 +228,7 @@ autocmd BufNewFile *.sh call append(0, "#!/bin/bash")
 autocmd BufNewFile *.j  set filetype=objj
 autocmd BufReadPre *.j  set filetype=objj
 
-
-autocmd FileType javascript set makeprg=cat\ %\ \\\|\ /opt/local/bin/js\ /Users/whamoo/.vim/plugin/mylintrun.js\ %
+autocmd FileType javascript set makeprg=cat\ %\ \\\|\ /opt/local/bin/js\ ~/.vim/plugin/mylintrun.js\ %
 "autocmd BufNewFile *.js set errorformat=%f:%l:%c:%m
 
 
@@ -256,10 +251,11 @@ if has('gui_running')
         set nomacatsui
     endif
 
-    set lines=40
+    set lines=46
+    set columns=180
     set anti
     set gfn=Monaco:h12
-    colorscheme whamoocolor  
+    colorscheme pastelbox
     hi User1 guifg=#009999 guibg=#00487D 
 
     " Removing toolbar
@@ -270,36 +266,36 @@ endif
 
 " MakeMain()
 " quick command to make a main function
-command Mkmain call MakeMain()
-function MakeMain()
-	call append(0, "#include <iostream>")
-	call append(1, "using namespace std;")
-	call append(2, "")
-	call append(3, "int main()")
-	call append(4, "{")
-	call append(5, "return 0;")
-	call append(6, "}")
-endfunction
+"command Mkmain call MakeMain()
+"function MakeMain()
+	"call append(0, "#include <iostream>")
+	"call append(1, "using namespace std;")
+	"call append(2, "")
+	"call append(3, "int main()")
+	"call append(4, "{")
+	"call append(5, "return 0;")
+	"call append(6, "}")
+"endfunction
 
 " Function for setting my sign and date
 function! SetDateComment()
     let line = line(".")
-    call setline(line, "Modified by Matteo Rattotti on: " . strftime("%c"))
+    call setline(line, "Modified by Konstantin Erokhin on: " . strftime("%c"))
 endfunction
 
 " Show all white Space
-command WSpace call ShowWhiteSpace()
-function ShowWhiteSpace()
-    highlight spaceEOL ctermbg=red guibg=red
-    match spaceEOL /^\s*\ \s*\|\s\+$/
-endfunction
+"command WSpace call ShowWhiteSpace()
+"function ShowWhiteSpace()
+    "highlight spaceEOL ctermbg=red guibg=red
+    "match spaceEOL /^\s*\ \s*\|\s\+$/
+"endfunction
 
 " Show all white space at EOL
-command WSpaceEOL call ShowWhiteSpaceEOL()
-function ShowWhiteSpaceEOL()
-    highlight spaceEOL ctermbg=red guibg=red
-    match spaceEOL /\s\+$/
-endfunction
+"command WSpaceEOL call ShowWhiteSpaceEOL()
+"function ShowWhiteSpaceEOL()
+    "highlight spaceEOL ctermbg=red guibg=red
+    "match spaceEOL /\s\+$/
+"endfunction
 
 
 ""Can be: linux, mac, windows
@@ -308,26 +304,28 @@ fun! MySys()
 endfun
 " End Function
 
-fun CssComment(commentString)
-    echo a:commentString
-    let startingString = a:commentString
-    let startingString = "/***** " .startingString. " "
-    let commentLenght = strlen(startingString)
-    let completeString = ""
-    while commentLenght < 80
-        let completeString = completeString."*"
-        let commentLenght = strlen(startingString) + strlen(completeString)
-    endwhile
-    let completeString = completeString."/"
-    return completeString    
-endfun
+"fun CssComment(commentString)
+    "echo a:commentString
+    "let startingString = a:commentString
+    "let startingString = "/***** " .startingString. " "
+    "let commentLenght = strlen(startingString)
+    "let completeString = ""
+    "while commentLenght < 80
+        "let completeString = completeString."*"
+        "let commentLenght = strlen(startingString) + strlen(completeString)
+    "endwhile
+    "let completeString = completeString."/"
+    "return completeString    
+"endfun
 
 
 ",v brings up my .vimrc
 ",V reloads it -- making all changes active (have to save first)
-map ,v :sp .vimrc<CR><C-W>_
-map <silent> ,V :source .vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+map ,v :sp ~/.vimrc<CR><C-W>_
+map <silent> ,V :source ~/.vim/vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
+",d insert python debug line
+map ,d ifrom pudb import set_trace; set_trace()
 
 " The following beast is something i didn't write... it will return the
 " syntax highlighting group that the current "thing" under the cursor
@@ -342,20 +340,55 @@ nmap  ,i :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
 
 
 " Function that define what the guitablabel should display
-function GuiTabLabel()
-  let label = ''
-  let bufnrlist = tabpagebuflist(v:lnum)
+"function GuiTabLabel()
+  "let label = ''
+  "let bufnrlist = tabpagebuflist(v:lnum)
 
-  " Add '+' if one of the buffers in the tab page is modified
-  for bufnr in bufnrlist
-    if getbufvar(bufnr, "&modified")
-      let label = '+'
-      break
-    endif
-  endfor
+  "" Add '+' if one of the buffers in the tab page is modified
+  "for bufnr in bufnrlist
+    "if getbufvar(bufnr, "&modified")
+      "let label = '+'
+      "break
+    "endif
+  "endfor
 
-  " Append the buffer name
-  return label " . filename(bufnrlist[tabpagewinnr(v:lnum) - 1])
-endfunction
+  "" Append the buffer name
+  "return label " . filename(bufnrlist[tabpagewinnr(v:lnum) - 1])
+"endfunction
 
-set guitablabel=%{GuiTabLabel()}%t
+"set guitablabel=%{GuiTabLabel()}%t
+
+"" Took from http://amix.dk/blog/post/19486#The-ultimate-vim-configuration-vimrc
+"" Set 10 lines to the curors - when moving vertical..
+set so=10
+"" The commandbar height
+set cmdheight=2
+"Auto indent
+set ai 
+"Smart indet
+set si
+"Wrap lines
+set wrap
+
+" Navigate tabs with cmd-1, cmd-2, etc [command mode]
+map <D-1> :tabn 1<CR>
+map <D-2> :tabn 2<CR>
+map <D-3> :tabn 3<CR>
+map <D-4> :tabn 4<CR>
+map <D-5> :tabn 5<CR>
+map <D-6> :tabn 6<CR>
+map <D-7> :tabn 7<CR>
+map <D-8> :tabn 8<CR>
+map <D-9> :tabn 9<CR>
+
+" Navigate tabs with cmd-1, cmd-2, etc [insert mode]
+map! <D-1> <C-O>:tabn 1<CR>
+map! <D-2> <C-O>:tabn 2<CR>
+map! <D-3> <C-O>:tabn 3<CR>
+map! <D-4> <C-O>:tabn 4<CR>
+map! <D-5> <C-O>:tabn 5<CR>
+map! <D-6> <C-O>:tabn 6<CR>
+map! <D-7> <C-O>:tabn 7<CR>
+map! <D-8> <C-O>:tabn 8<CR>
+map! <D-9> <C-O>:tabn 9<CR>
+

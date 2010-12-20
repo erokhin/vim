@@ -19,3 +19,9 @@
 [submodule "bundle/AutoComplPop"]
 	path = bundle/AutoComplPop
 	url = https://github.com/vim-scripts/AutoComplPop.git
+[submodule "bundle/bufexplorer"]
+	path = bundle/bufexplorer
+	url = https://github.com/slack/vim-bufexplorer.git
+[submodule "bundle/hexHighlight"]
+	path = bundle/hexHighlight
+	url = https://github.com/EmmanuelOga/hexHighlight.git
