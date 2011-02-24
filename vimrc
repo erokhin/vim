@@ -44,6 +44,7 @@ nmap <silent> <leader>s :set nolist!<CR>
 map <leader>f :FufFile <C-r>='**/'<CR><CR>
 "map <leader>ff :FufFile <C-r>=expand(fnamemodify('.',':p:p')).'**/'<CR><CR>
 map <leader>p :execute 'NERDTreeToggle ' . getcwd()<CR>
+map <leader>h :call HexHighlight()<CR>
 
 " Seriously, guys. It's not like :W is bound to anything anyway.
 command! W :w
@@ -251,8 +252,8 @@ if has('gui_running')
         set nomacatsui
     endif
 
-    set lines=46
-    set columns=180
+    set lines=10000
+    set columns=10000
     set anti
     set gfn=Monaco:h12
     colorscheme pastelbox
@@ -277,26 +278,23 @@ endif
 	"call append(6, "}")
 "endfunction
 
+" Function for changing resolution
+"function ChangeResolution()
+    "if &lines > 50
+        "set lines=46
+        "set columns=180
+    "else 
+        "set lines=69
+        "set columns=268
+    "endif
+"endfunction
+"map <leader>k :call ChangeResolution()<CR>
+
 " Function for setting my sign and date
 function! SetDateComment()
     let line = line(".")
     call setline(line, "Modified by Konstantin Erokhin on: " . strftime("%c"))
 endfunction
-
-" Show all white Space
-"command WSpace call ShowWhiteSpace()
-"function ShowWhiteSpace()
-    "highlight spaceEOL ctermbg=red guibg=red
-    "match spaceEOL /^\s*\ \s*\|\s\+$/
-"endfunction
-
-" Show all white space at EOL
-"command WSpaceEOL call ShowWhiteSpaceEOL()
-"function ShowWhiteSpaceEOL()
-    "highlight spaceEOL ctermbg=red guibg=red
-    "match spaceEOL /\s\+$/
-"endfunction
-
 
 ""Can be: linux, mac, windows
 fun! MySys()
@@ -304,63 +302,26 @@ fun! MySys()
 endfun
 " End Function
 
-"fun CssComment(commentString)
-    "echo a:commentString
-    "let startingString = a:commentString
-    "let startingString = "/***** " .startingString. " "
-    "let commentLenght = strlen(startingString)
-    "let completeString = ""
-    "while commentLenght < 80
-        "let completeString = completeString."*"
-        "let commentLenght = strlen(startingString) + strlen(completeString)
-    "endwhile
-    "let completeString = completeString."/"
-    "return completeString    
-"endfun
-
-
 ",v brings up my .vimrc
 ",V reloads it -- making all changes active (have to save first)
-map ,v :sp ~/.vimrc<CR><C-W>_
-map <silent> ,V :source ~/.vim/vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+map <leader>v :sp ~/.vimrc<CR><C-W>_
+map <silent> <leader>V :source ~/.vim/vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 ",d insert python debug line
-map ,d ifrom pudb import set_trace; set_trace()
+map <leader>d ofrom pudb import set_trace; set_trace()<ESC>
 
 " The following beast is something i didn't write... it will return the
 " syntax highlighting group that the current "thing" under the cursor
 " belongs to -- very useful for figuring out what to change as far as
 " syntax highlighting goes.
-nmap  ,i :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
+nmap  <leader>i :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
      \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name")
      \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
      \ . ">"<CR>
 
-" then :highlight show all the current colors
-
-
-" Function that define what the guitablabel should display
-"function GuiTabLabel()
-  "let label = ''
-  "let bufnrlist = tabpagebuflist(v:lnum)
-
-  "" Add '+' if one of the buffers in the tab page is modified
-  "for bufnr in bufnrlist
-    "if getbufvar(bufnr, "&modified")
-      "let label = '+'
-      "break
-    "endif
-  "endfor
-
-  "" Append the buffer name
-  "return label " . filename(bufnrlist[tabpagewinnr(v:lnum) - 1])
-"endfunction
-
-"set guitablabel=%{GuiTabLabel()}%t
-
 "" Took from http://amix.dk/blog/post/19486#The-ultimate-vim-configuration-vimrc
 "" Set 10 lines to the curors - when moving vertical..
-set so=10
+" set so=10
 "" The commandbar height
 set cmdheight=2
 "Auto indent
