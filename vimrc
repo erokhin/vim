@@ -1,5 +1,5 @@
-" Matteo Rattotti vimrc file 
-" Modified by Matteo Rattotti on: Wed May 28 15:19:43 2008
+" Konstantin V. Erokhin vimrc file 
+" Modified by Konstantin Erokhin on: Fri Feb 25 21:47:44 2011
 
 " Plugin I'm using: 
 " - supertab
@@ -32,16 +32,20 @@ let g:mapleader = ","
 nnoremap ' `
 nnoremap ` '
 
-" mapping - to search
+" vertical split characters
+set enc=utf-8
+set fillchars=vert:☥          "✞◦❚❙〯☥⌚☕⦁⦂⦙⦚⧚⋱≬⋄䷁𝌺𝌆䷀𝍖⌚⑇
+" mapping - to search〯
 nmap - /
 
 " toggling search highlight with ,n
 nmap <silent> <leader>n :silent :nohlsearch<CR>
+
 " showing trailing white space
 set listchars=tab:>-,trail:·,eol:$
 nmap <silent> <leader>s :set nolist!<CR>
 
-map <leader>f :FufFile <C-r>='**/'<CR><CR>
+"map <leader>f :FufFile <C-r>='**/'<CR><CR>
 "map <leader>ff :FufFile <C-r>=expand(fnamemodify('.',':p:p')).'**/'<CR><CR>
 map <leader>p :execute 'NERDTreeToggle ' . getcwd()<CR>
 map <leader>h :call HexHighlight()<CR>
@@ -71,6 +75,8 @@ set cursorline      " I Want to see where i'm!!
 set wildmenu        " Set enhanced comand menu' completion
 set history=1000    " Vim now will remember 1000 commands
 set undolevels=1000 " use many levels of undo
+set undodir=~/.vim/undodir
+set undofile
 set autochdir       " automatically switch working path to the edited file
 set sessionoptions=blank,buffers,curdir,folds,help,options,tabpages,winsize,resize
 
@@ -106,7 +112,8 @@ set vb t_vb=       " Set visualbell not orrible beep
 
 " status bar setting
 set laststatus=2   " Always show the status line 
-set statusline=%1*%y\ %t%=\ %l-%c\ [%n]\ %p%\%
+" http://got-ravings.blogspot.com/2008/08/vim-pr0n-making-statuslines-that-own.html
+set statusline=%**%y\ %t%=\ %l-%c\ [%n]\ %p%\%
 
 filetype on            " enables filetype detection
 filetype plugin on     " enables filetype specific plugins
@@ -144,7 +151,7 @@ autocmd FileType html set ft=htmldjango.html " For SnipMate
 autocmd FileType htmldjango set ft=htmldjango.html " For SnipMate
 
 " NERD_tree config
-let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$'] " '\.vim$'
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '\.DS_Store'] " '\.vim$'
 let NERDTreeShowBookmarks=1
 let NERDTreeChDirMode=2
 
@@ -257,7 +264,6 @@ if has('gui_running')
     set anti
     set gfn=Monaco:h12
     colorscheme pastelbox
-    hi User1 guifg=#009999 guibg=#00487D 
 
     " Removing toolbar
     set guioptions-=T
@@ -293,7 +299,7 @@ endif
 " Function for setting my sign and date
 function! SetDateComment()
     let line = line(".")
-    call setline(line, "Modified by Konstantin Erokhin on: " . strftime("%c"))
+    call setline(line, "Modified by Konstantin V. Erokhin on: " . strftime("%c"))
 endfunction
 
 ""Can be: linux, mac, windows

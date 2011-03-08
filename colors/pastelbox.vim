@@ -1,4 +1,4 @@
-" Maintaner: Konstantin V. Erokhin <nerolapis@gmail.com>
+" Maintaner: Konstantin V. Erokhin <konstantin.erokhin@shinyfrog.net>
 " URL: 
 " Last Change: 20110221
 " Version: 0.2
@@ -56,14 +56,12 @@ hi Gray90 guifg=#262626
 hi Gray95 guifg=#111111
 hi Black guifg=#000000
 
-hi bgGray90 guibg=#262626
-
 " Current Line
 "set cursorline
 hi CursorLine guibg=#262626
 
 " Default Colors
-hi Normal guifg=#cdd0c8 guibg=#242424
+hi Normal guifg=#FFFFFF guibg=#242424
 hi NonText guifg=#2c3032 guibg=#2c3032 gui=none
 hi Cursor guibg=#babdb6                                        " QUI?
 hi ICursor guibg=#babdb6
@@ -73,9 +71,17 @@ hi Search guifg=#2e3436 guibg=#fcaf3e
 hi IncSearch guibg=#2e3436 guifg=#fcaf3e
 
 " Window Elements
-hi StatusLine guifg=#2e3436 guibg=#babdb6 gui=none
-hi StatusLineNC guifg=#2e3436 guibg=#888a85 gui=none
-hi VertSplit guifg=#555753 guibg=#888a85 gui=none
+
+"       ----- STATUS LINE -----
+hi StatusLine guifg=#242424 guibg=#C4DF9B gui=none
+hi StatusLineNC guifg=#898989 guibg=#D7D7D7 gui=none
+au InsertEnter * hi StatusLine guifg=#242424 guibg=#7EA7D8 gui=none 
+au InsertLeave * hi StatusLine guifg=#242424 guibg=#C4DF9B gui=none
+
+
+
+
+hi VertSplit guifg=#898989 guibg=#D7D7D7 gui=none
 hi Visual guibg=#dedede guifg=#3c3c3c
 hi MoreMsg guifg=#729fcf
 hi Question guifg=#8ae234 gui=none
@@ -105,9 +111,10 @@ hi Todo guifg=#fcaf3e guibg=bg
 hi SpecialKey guifg=#ef2929
 
 " Tabs
-hi TabLine guibg=#0a1012 guifg=#888a85
-hi TabLineFill guifg=#0a1012
-hi TabLineSel guibg=#555753 guifg=#eeeeec gui=none
+hi TabLine guifg=#555753 guibg=#888a85
+hi TabLineFill guifg=#555753 guibg=#888a85
+hi TabLineSel guifg=#555753 guibg=#888a85
+hi User1 guifg=#555753 guibg=#888a85
 
 " Matches
 hi MatchParen guifg=#242424 guibg=#fcaf3e
@@ -171,14 +178,9 @@ hi link xmlAttrib htmlArg
 " CSS
 hi cssSelectorOp guifg=#eeeeec
 hi link cssSelectorOp2 cssSelectorOp
-"hi cssUIProp guifg=#d3d7cf
 hi link cssPagingProp cssUIProp
 hi link cssGeneratedContentProp cssUIProp
 hi link cssRenderProp cssUIProp
-"hi link cssBoxProp cssUIProp
-"hi link cssTextProp cssUIProp
-"hi link cssColorProp cssUIProp
-"hi link cssFontProp cssUIProp
 hi cssPseudoClassId guifg=#eeeeec
 hi cssBraces guifg=#888a85
 hi cssIdentifier guifg=#fcaf3e
@@ -203,3 +205,5 @@ hi link cssBoxProp PastelVioletMagenta
 hi link cssRenderProp PastelRed
 hi link cssColorProp PastelYellow
 hi link cssUIProp PastelMagenta
+
+
