@@ -50,6 +50,11 @@ nmap <silent> <leader>s :set nolist!<CR>
 map <leader>p :execute 'NERDTreeToggle ' . getcwd()<CR>
 map <leader>h :call HexHighlight()<CR>
 
+" mapping %% with full path of the currently edited file
+cabbr <expr> %% expand('%:p:h')
+" mapping <leader>e whith current path expansion
+nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
+
 " Seriously, guys. It's not like :W is bound to anything anyway.
 command! W :w
 
@@ -79,6 +84,10 @@ set undodir=~/.vim/undodir
 set undofile
 set autochdir       " automatically switch working path to the edited file
 set sessionoptions=blank,buffers,curdir,folds,help,options,tabpages,winsize,resize
+
+" Splitting
+set splitbelow     " Split windows at bottom
+set splitright     " Split the window on the right
 
 " No blink cursor
 set guicursor=a:blinkon0
@@ -244,6 +253,13 @@ autocmd FileType javascript set makeprg=cat\ %\ \\\|\ /opt/local/bin/js\ ~/.vim/
 au! BufRead,BufNewFile *.mkd   setfiletype mkd
 au! BufRead,BufNewFile *.mk   setfiletype mkd
 
+" Removing right scrollbar
+set guioptions-=r
+set guioptions-=R
+
+" Removing left scrollbar
+set guioptions-=l
+set guioptions-=L
 
 " (GUI) Live line reordering 
 nnoremap <silent> <C-A-Up> :move .-2<CR>
@@ -259,10 +275,10 @@ if has('gui_running')
         set nomacatsui
     endif
 
-    set lines=10000
-    set columns=10000
+    set lines=80
+    set columns=270
     set anti
-    set gfn=Monaco:h12
+    set gfn=Monaco:h11
     colorscheme pastelbox
 
     " Removing toolbar
@@ -313,8 +329,14 @@ endfun
 map <leader>v :sp ~/.vimrc<CR><C-W>_
 map <silent> <leader>V :source ~/.vim/vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
-",d insert python debug line
-map <leader>d ofrom pudb import set_trace; set_trace()<ESC>
+",d insert python debug line ofrom pudb import set_trace; set_trace()<ESC>
+map <leader>d ofrom pudb import set_trace; set_trace()<ESC> 
+"from pudb import set_trace; set_trace()<ESC>
+map <leader>f ofrom IPython.Shell import IPShellEmbed; IPShellEmbed()()<ESC> 
+
+
+",l insert python debug message (django logging system)
+map <leader>l oimport logging;logging.debug("")<ESC>hha
 
 " The following beast is something i didn't write... it will return the
 " syntax highlighting group that the current "thing" under the cursor
