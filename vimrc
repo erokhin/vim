@@ -1,25 +1,14 @@
 " Konstantin V. Erokhin vimrc file 
-" Modified by Konstantin Erokhin on: Fri Feb 25 21:47:44 2011
 
 " Plugin I'm using: 
-" - supertab
-" - Nerd_commenter
-" - snippetsEmu
-" - SearchComplete
-" - project
-" - autocomplpop
-" - python.vim
+" ls /bundle/
 
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-let g:SuperTabCrMapping = 0
-
-" Remove the nasty windows endline
-map MM :%s/\r/\r/g
-
-" Set Modification date by me
-map \d :<C-u> call SetDateComment()<CR>
+" vim-airline > statusline
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
 
 " Syntax  
 syntax on
@@ -28,104 +17,72 @@ syntax on
 let mapleader = ","
 let g:mapleader = ","
 
-" remapping ` to '
-nnoremap ' `
-nnoremap ` '
-
 " vertical split characters
 set enc=utf-8
-set fillchars=vert:☥          "✞◦❚❙〯☥⌚☕⦁⦂⦙⦚⧚⋱≬⋄䷁𝌺𝌆䷀𝍖⌚⑇
-" mapping - to search〯
-nmap - /
-
-" toggling search highlight with ,n
-nmap <silent> <leader>n :silent :nohlsearch<CR>
-
-" showing trailing white space
-set listchars=tab:>-,trail:·,eol:$
-nmap <silent> <leader>s :set nolist!<CR>
-
-"map <leader>f :FufFile <C-r>='**/'<CR><CR>
-"map <leader>ff :FufFile <C-r>=expand(fnamemodify('.',':p:p')).'**/'<CR><CR>
-map <leader>p :execute 'NERDTreeToggle ' . getcwd()<CR>
-map <leader>h :call HexHighlight()<CR>
-
-" mapping %% with full path of the currently edited file
-cabbr <expr> %% expand('%:p:h')
-" mapping <leader>e whith current path expansion
-nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
-
-" Seriously, guys. It's not like :W is bound to anything anyway.
-command! W :w
-
-"Will allow you to use :w!! to write to a file using sudo 
-cmap w!! %!sudo tee > /dev/null %
-
-let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
-let g:fuf_modesDisable = []
-let g:fuf_mrufile_maxItem = 300
-let g:fuf_mrucmd_maxItem = 400
+set fillchars=vert:☥ " ✞◦❚❙〯☥⌚☕⦁⦂⦙⦚⧚⋱≬⋄䷁𝌺𝌆䷀𝍖⌚⑇
 
 """ behaviour settings
-set ch=2            " Make command line two lines high
-set mousehide       " Hide the mouse when typing text
-
-set showcmd         " Show partial command in status bar
-set nocompatible    " allow breaking vanilla vi compatibility
-set showmatch       " Highlight the matches of the last search
-set backspace=2     " allow backspacing over everything in insert mode
-set autoindent      " always set autoindenting on
-set textwidth=0     " Don't wrap words by default
-set cursorline      " I Want to see where i'm!!
-set wildmenu        " Set enhanced comand menu' completion
-set history=1000    " Vim now will remember 1000 commands
-set undolevels=1000 " use many levels of undo
+set ch=2                        " Make command line two lines high
+set mousehide                   " Hide the mouse when typing text
+set showcmd                     " Show partial command in status bar
+set nocompatible                " allow breaking vanilla vi compatibility
+set showmatch                   " Highlight the matches of the last search
+set backspace=2                 " allow backspacing over everything in insert mode
+set autoindent                  " always set autoindenting on
+set textwidth=0                 " Don't wrap words by default
+set cursorline                  " I Want to see where i'm!!
+set wildmenu                    " Set enhanced comand menu' completion
+set history=1000                " Vim now will remember 1000 commands
+set undolevels=1000             " use many levels of undo
 set undodir=~/.vim/undodir
 set undofile
-set autochdir       " automatically switch working path to the edited file
+set autochdir                   " automatically switch working path to the edited file
 set sessionoptions=blank,buffers,curdir,folds,help,options,tabpages,winsize,resize
 
 " Splitting
-set splitbelow     " Split windows at bottom
-set splitright     " Split the window on the right
+set splitbelow                  " Split windows at bottom
+set splitright                  " Split the window on the right
 
 " No blink cursor
 set guicursor=a:blinkon0
 
-"Bbackspace and cursor keys wrap to
-set whichwrap+=<,>,h,l
+" Backspace and cursor keys wrap to
+" http://vim.wikia.com/wiki/Automatically_wrap_left_and_right
+set whichwrap+=<,>,h,l,[,]
 
-"Set magic on
+" Set magic on
+" http://vimdoc.sourceforge.net/htmldoc/pattern.html#/magic
 set magic
 
 " Search setting
-set hlsearch       " Highlith search result
-set incsearch      " Enable incremental searching by default
-set ignorecase     " Ignore case-sensitive
+set hlsearch                    " Highlith search result
+set incsearch                   " Enable incremental searching by default
+set ignorecase                  " Ignore case-sensitive
 
 " vim tab (for multiple file)
-map <leader>tn :tabnew<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
+" map <leader>tn :tabnew<cr>
+" map <leader>tc :tabclose<cr>
+" map <leader>tm :tabmove 
 
-"set foldcolumn=2   "Space for simbols
 set foldmethod=indent " Make folding indent sensitive
-set foldlevel=100 " Don't autofold anything (but I can still fold manually)
-"set foldopen-=search " don't open folds when you search into them
-"set foldopen-=undo " don't open folds when you undo stuff
+set foldlevel=10000 " Don't autofold anything (but I can still fold manually)
+
+" No folding biyach!
+" set nofoldenable
 
 " Bells management
-set noerrorbells   " 
-set visualbell     " 
-set vb t_vb=       " Set visualbell not orrible beep
+set noerrorbells                " 
+set visualbell                  " 
+set vb t_vb=                    " Set visualbell not orrible beep
 
 " status bar setting
-set laststatus=2   " Always show the status line 
-" http://got-ravings.blogspot.com/2008/08/vim-pr0n-making-statuslines-that-own.html
-set statusline=%**%y\ %t%=\ %l-%c\ [%n]\ %p%\%
+set laststatus=2                " Always show the status line 
 
-filetype on            " enables filetype detection
-filetype plugin on     " enables filetype specific plugins
+" http://got-ravings.blogspot.com/2008/08/vim-pr0n-making-statuslines-that-own.html
+" set statusline=%**%y\ %t%=\ %l-%c\ [%n]\ [%{&fo}]\ %p%\%
+
+filetype on                     " enables filetype detection
+filetype plugin on              " enables filetype specific plugins
 filetype indent on
 
 " Set the TAB behaviour (python programming)
@@ -133,93 +90,101 @@ set softtabstop=4
 set shiftwidth=4
 set ruler
 set expandtab
-set number " Set line number 
+set number                      " Set line number 
 
 " Backup file and swapfiles
 set dir=~/.vimSwap
 set nobackup
 "set backupdir=~/.vim/backup
 "set directory=~/.vim/tmp
-"
+
+"" Took from http://amix.dk/blog/post/19486#The-ultimate-vim-configuration-vimrc
+" Set 10 lines to the curors - when moving vertical..
+set so=15
+" The commandbar height
+set cmdheight=2
+"Auto indent
+set ai 
+"Smart indet
+set si
+"Wrap lines
+set wrap
 
 " % matching also on if, else, ifelse, etc..
-runtime macros/matchit.vim
+" runtime macros/matchit.vim
 
 " Completion
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c set omnifunc=ccomplete#Complete
+" Now the completion is handled by YouCompleteMe
+" https://github.com/Valloric/YouCompleteMe
 
-" Django SnipMate completion
-autocmd FileType python set ft=python.django " For SnipMate
-autocmd FileType html set ft=htmldjango.html " For SnipMate
-autocmd FileType htmldjango set ft=htmldjango.html " For SnipMate
+" autocmd FileType python set omnifunc=pythoncomplete#Complete
+" autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+" autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+" autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+" autocmd FileType c set omnifunc=ccomplete#Complete
 
 " NERD_tree config
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '\.DS_Store'] " '\.vim$'
 let NERDTreeShowBookmarks=1
 let NERDTreeChDirMode=2
 
-" Nerd_commenter config
-let NERDShutUp=1
-
 " Setting omnicompletion behaviour
 " http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
-set completeopt=longest,menuone
-inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
-inoremap <expr> <c-n> pumvisible() ? "\<lt>c-n>" : "\<lt>c-n>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>"
-inoremap <expr> <m-;> pumvisible() ? "\<lt>c-n>" : "\<lt>c-x>\<lt>c-o>\<lt>c-n>\<lt>c-p>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>"
+" set completeopt=longest,menuone
+" inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
+" inoremap <expr> <c-n> pumvisible() ? "\<lt>c-n>" : "\<lt>c-n>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>"
+" inoremap <expr> <m-;> pumvisible() ? "\<lt>c-n>" : "\<lt>c-x>\<lt>c-o>\<lt>c-n>\<lt>c-p>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>"
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Command-line config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-func! Cwd()
-  let cwd = getcwd()
-  return "e " . cwd 
-endfunc
 
-func! DeleteTillSlash()
-  let g:cmd = getcmdline()
-  if MySys() == "linux" || MySys() == "mac"
-    let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*", "\\1", "")
-  else
-    let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\]\\).*", "\\1", "")
-  endif
-  if g:cmd == g:cmd_edited
-    if MySys() == "linux" || MySys() == "mac"
-      let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
-    else
-      let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\\]\\).*\[\\\\\]", "\\1", "")
-    endif
-  endif
-  return g:cmd_edited
-endfunc
+" func! Cwd()
+"   let cwd = getcwd()
+"   return "e " . cwd 
+" endfunc
 
-func! CurrentFileDir(cmd)
-  return a:cmd . " " . expand("%:p:h") . "/"
-endfunc
+" func! DeleteTillSlash()
+"   let g:cmd = getcmdline()
+"   if MySys() == "linux" || MySys() == "mac"
+"     let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*", "\\1", "")
+"   else
+"     let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\]\\).*", "\\1", "")
+"   endif
+"   if g:cmd == g:cmd_edited
+"     if MySys() == "linux" || MySys() == "mac"
+"       let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
+"     else
+"       let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\\]\\).*\[\\\\\]", "\\1", "")
+"     endif
+"   endif
+"   return g:cmd_edited
+" endfunc
 
-"Smart mappings on the command line
-cno $h e ~/
-cno $d e ~/Desktop/
-cno $j e ./
+" func! CurrentFileDir(cmd)
+"   return a:cmd . " " . expand("%:p:h") . "/"
+" endfunc
 
-" Delete until backward slash
-cno $q <C-\>eDeleteTillSlash()<cr>
+" "Smart mappings on the command line
+" cno $h e ~/
+" cno $d e ~/Desktop/
+" cno $j e ./
 
-cno $c e <C-\>eCurrentFileDir("e")<cr>
+" " Delete until backward slash
+" cno $q <C-\>eDeleteTillSlash()<cr>
 
-cno $tc <C-\>eCurrentFileDir("tabnew")<cr>
-cno $th tabnew ~/
-cno $td tabnew ~/Desktop/
+" cno $c e <C-\>eCurrentFileDir("e")<cr>
+
+" cno $tc <C-\>eCurrentFileDir("tabnew")<cr>
+" cno $th tabnew ~/
+" cno $td tabnew ~/Desktop/
 
 "Bash like
-cnoremap <C-A>    <Home>
-cnoremap <C-E>    <End>
-cnoremap <C-K>    <C-U>
+" cnoremap <C-A>    <Home>
+" cnoremap <C-E>    <End>
+" cnoremap <C-K>    <C-U>
 
 " Some automatic header on newfile (Python and bash)
 " PYTHON
@@ -244,10 +209,6 @@ autocmd BufNewFile *.sh call append(0, "#!/bin/bash")
 " Obj-j
 autocmd BufNewFile *.j  set filetype=objj
 autocmd BufReadPre *.j  set filetype=objj
-
-autocmd FileType javascript set makeprg=cat\ %\ \\\|\ /opt/local/bin/js\ ~/.vim/plugin/mylintrun.js\ %
-"autocmd BufNewFile *.js set errorformat=%f:%l:%c:%m
-
 
 " Markdown
 au! BufRead,BufNewFile *.mkd   setfiletype mkd
@@ -275,10 +236,11 @@ if has('gui_running')
         set nomacatsui
     endif
 
-    set lines=80
-    set columns=270
+    set lines=88
+    set columns=272
     set anti
-    set gfn=Monaco:h11
+    " Removing due to Lion slowing
+    " set gfn=Osaka-Mono:h13
     colorscheme pastelbox
 
     " Removing toolbar
@@ -312,31 +274,156 @@ endif
 "endfunction
 "map <leader>k :call ChangeResolution()<CR>
 
+
+
+""Can be: linux, mac, windows
+" fun! MySys()
+"   return "mac"
+" endfun
+" End Function
+
+" fun! ShowColourSchemeName()
+"     try
+"         echo g:colors_name
+"     catch /^Vim:E121/
+"         echo "default
+"     endtry
+" endfun
+
+""" PYTHON DEBUG
+",d insert python debug line ofrom pudb import set_trace; set_trace()<ESC>
+" map <leader>d ofrom pudb import set_trace; set_trace()<ESC> 
+"from pudb import set_trace; set_trace()<ESC>
+" map <leader>f ofrom IPython.Shell import IPShellEmbed; IPShellEmbed()()<ESC> 
+
+
+",l insert python debug message (django logging system)
+" map <leader>l oimport logging;logging.debug("")<ESC>hha
+
+" " Use neocomplcache.
+" let g:neocomplcache_enable_at_startup = 1
+" " Use smartcase.
+" let g:neocomplcache_enable_smart_case = 1
+" " Use camel case completion.
+" let g:neocomplcache_enable_camel_case_completion = 1
+" " Use underbar completion.
+" let g:neocomplcache_enable_underbar_completion = 1
+" " Set minimum syntax keyword length.
+" let g:neocomplcache_min_syntax_length = 3
+" let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+" " Define dictionary.
+" let g:neocomplcache_dictionary_filetype_lists = { 'default' : '', }
+" " Define keyword.
+" if !exists('g:neocomplcache_keyword_patterns')
+"   let g:neocomplcache_keyword_patterns = {}
+" endif
+" let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+" " Recommended key-mappings.
+" " <CR>: insert current completion.
+" inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+" " <TAB>: move to next completion.
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" " <C-h>, <BS>: close popup and delete backword char.
+" inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+" inoremap <expr><C-y>  neocomplcache#close_popup()
+" inoremap <expr><C-e>  neocomplcache#cancel_popup()
+" " auto select first completion entry
+" let g:neocomplcache_enable_auto_select = 1
+
+" Plugin key-mappings.
+" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+
+" SuperTab like snippets behavior.
+" imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand)" : "\<CR>"
+" imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+" smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For snippet_complete marker.
+" if has('conceal')
+"   set conceallevel=2 concealcursor=i
+" endif
+
+" let g:neosnippet#enable_snipmate_compatibility = 1
+" let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
+
+" " Django SnipMate completion
+" autocmd FileType python set ft=python.django " For SnipMate
+" autocmd FileType html set ft=htmldjango.html " For SnipMate
+" autocmd FileType htmldjango set ft=htmldjango.html " For SnipMate
+
+" Mapping recent file to ,f CtrlP vim plugin
+" map <leader>f :CtrlP<CR>
+" map <leader>r ::CtrlPMRU<CR>
+" let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+"   \ 'file': '\v\.(exe|so|dll)$',
+"   \ 'link': 'some_bad_symbolic_links'
+"   \ }
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
+" vim-session
+let g:session_autosave = 'no'
+let g:session_autoload = 'no'
+
+" Code completion using YouCompleteMe and omnifunc
+" https://github.com/Valloric/YouCompleteMe
+set omnifunc=syntaxcomplete#Complete
+let g:ycm_semantic_triggers.php = ['re!.', '->', '::']
+" That will ensure all completions will be presented, but might cause stuttering and lagginess if the omnifunc is slow
+let g:ycm_cache_omnifunc = 0
+
+" ******************************************************************************
+" Functions
+" ******************************************************************************
+
 " Function for setting my sign and date
 function! SetDateComment()
     let line = line(".")
     call setline(line, "Modified by Konstantin V. Erokhin on: " . strftime("%c"))
 endfunction
 
-""Can be: linux, mac, windows
-fun! MySys()
-  return "mac"
-endfun
-" End Function
+" ******************************************************************************
+" Mappings
+" ******************************************************************************
+
+" remapping ` to '
+nnoremap ' `
+nnoremap ` '
+
+" mapping - to search〯
+nmap - /
+
+" toggling search highlight with ,n
+nmap <silent> <leader>n :silent :nohlsearch<CR>
+
+" showing trailing white space
+nmap <silent> <leader>s :set nolist!<CR>
+
+nmap <leader>p :execute 'NERDTreeToggle ' . getcwd()<CR>
+nmap <leader>h :call HexHighlight()<CR>
+
+" mapping <leader>e whith current path expansion
+nnoremap <leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
+
+" Remove the windows endline
+map MM :%s/\r/\r/g
+
+" Set Modification date by me
+map <leader>d :<C-u> call SetDateComment()<CR>
+
+" sudo write file
+noremap <leader>W :w !sudo tee % > /dev/null
 
 ",v brings up my .vimrc
 ",V reloads it -- making all changes active (have to save first)
 map <leader>v :sp ~/.vimrc<CR><C-W>_
 map <silent> <leader>V :source ~/.vim/vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-
-",d insert python debug line ofrom pudb import set_trace; set_trace()<ESC>
-map <leader>d ofrom pudb import set_trace; set_trace()<ESC> 
-"from pudb import set_trace; set_trace()<ESC>
-map <leader>f ofrom IPython.Shell import IPShellEmbed; IPShellEmbed()()<ESC> 
-
-
-",l insert python debug message (django logging system)
-map <leader>l oimport logging;logging.debug("")<ESC>hha
 
 " The following beast is something i didn't write... it will return the
 " syntax highlighting group that the current "thing" under the cursor
@@ -346,29 +433,6 @@ nmap  <leader>i :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
      \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name")
      \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
      \ . ">"<CR>
-
-"" Took from http://amix.dk/blog/post/19486#The-ultimate-vim-configuration-vimrc
-"" Set 10 lines to the curors - when moving vertical..
-" set so=10
-"" The commandbar height
-set cmdheight=2
-"Auto indent
-set ai 
-"Smart indet
-set si
-"Wrap lines
-set wrap
-
-" Navigate tabs with cmd-1, cmd-2, etc [command mode]
-map <D-1> :tabn 1<CR>
-map <D-2> :tabn 2<CR>
-map <D-3> :tabn 3<CR>
-map <D-4> :tabn 4<CR>
-map <D-5> :tabn 5<CR>
-map <D-6> :tabn 6<CR>
-map <D-7> :tabn 7<CR>
-map <D-8> :tabn 8<CR>
-map <D-9> :tabn 9<CR>
 
 " Navigate tabs with cmd-1, cmd-2, etc [insert mode]
 map! <D-1> <C-O>:tabn 1<CR>
@@ -381,3 +445,13 @@ map! <D-7> <C-O>:tabn 7<CR>
 map! <D-8> <C-O>:tabn 8<CR>
 map! <D-9> <C-O>:tabn 9<CR>
 
+" Remapping the ESC key (app.net @ianpaul)
+inoremap jk <Esc>
+
+" Remapping for plugin vim-commentary
+if !hasmapto('<Plug>Commentary') || maparg('\\','n') ==# '' && maparg('\','n') ==# ''
+  xmap <leader>c  <Plug>Commentary
+  nmap <leader>c  <Plug>Commentary
+  nmap <leader>cc <Plug>CommentaryLine
+  nmap <leader>cu <Plug>CommentaryUndo
+endif

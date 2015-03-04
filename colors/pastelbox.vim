@@ -1,7 +1,7 @@
 " Maintaner: Konstantin V. Erokhin <konstantin.erokhin@shinyfrog.net>
 " URL: 
 " Last Change: 20110221
-" Version: 0.2
+" Version: 0.3
 "
 " Changelog:
 
@@ -58,12 +58,13 @@ hi Black guifg=#000000
 
 " Current Line
 "set cursorline
-hi CursorLine guibg=#262626
+hi CursorLine guibg=#2c2c2c
+"hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=#2c2c2c
 
 " Default Colors
-hi Normal guifg=#FFFFFF guibg=#242424
-hi NonText guifg=#2c3032 guibg=#2c3032 gui=none
-hi Cursor guibg=#babdb6                                        " QUI?
+hi Normal guifg=#FFFFFF guibg=#262626
+hi NonText guifg=#262626 guibg=#262626 gui=none
+hi Cursor guibg=#babdb6
 hi ICursor guibg=#babdb6
 
 " Search
@@ -72,26 +73,26 @@ hi IncSearch guibg=#2e3436 guifg=#fcaf3e
 
 " Window Elements
 
-"       ----- STATUS LINE -----
-hi StatusLine guifg=#242424 guibg=#C4DF9B gui=none
+" -----------
+" STATUS LINE
+" -----------
+hi StatusLine guifg=#262626 guibg=#A2D39C gui=none
 hi StatusLineNC guifg=#898989 guibg=#D7D7D7 gui=none
 au InsertEnter * hi StatusLine guifg=#242424 guibg=#7EA7D8 gui=none 
-au InsertLeave * hi StatusLine guifg=#242424 guibg=#C4DF9B gui=none
-
-
-
+au InsertLeave * hi StatusLine guifg=#242424 guibg=#A2D39C gui=none
 
 hi VertSplit guifg=#898989 guibg=#D7D7D7 gui=none
 hi Visual guibg=#dedede guifg=#3c3c3c
 hi MoreMsg guifg=#729fcf
 hi Question guifg=#8ae234 gui=none
 hi WildMenu guifg=#eeeeec guibg=#0e1416
-hi LineNr guifg=#3f4b4d guibg=#000000                          " QUI!
+hi LineNr guifg=#3f4b4d guibg=#000000
+hi CursorLineNr guifg=#FFF79A guibg=#000000
 hi SignColumn guibg=#1e2426
 
 " Pmenu
-hi Pmenu guibg=#2e3436 guifg=#eeeeec
-hi PmenuSel guibg=#ffffff guifg=#1e2426
+hi Pmenu guibg=#2c2c2c guifg=#eeeeec
+hi PmenuSel guibg=#eeeeec guifg=#2c2c2c
 hi PmenuSbar guibg=#555753
 hi PmenuThumb guifg=#ffffff
 
@@ -176,15 +177,20 @@ hi link xmlEndTag htmlEndTag
 hi link xmlAttrib htmlArg
 
 " CSS
-hi cssSelectorOp guifg=#eeeeec
+hi link cssSelectorOp Gray15
 hi link cssSelectorOp2 cssSelectorOp
+hi link cssAttributeSelector cssSelectorOp
+
 hi link cssPagingProp cssUIProp
 hi link cssGeneratedContentProp cssUIProp
 hi link cssRenderProp cssUIProp
-hi cssPseudoClassId guifg=#eeeeec
-hi cssBraces guifg=#888a85
-hi cssIdentifier guifg=#fcaf3e
-hi cssTagName guifg=#fcaf3e
+hi link cssPseudoClassId Gray10
+hi link cssBraces Gray55
+
+hi link cssIdentifier PastelRed
+hi link cssClassName PastelRedOrange
+hi link cssTagName PastelYellowOrange
+
 hi link cssInclude Function
 hi link cssCommonAttr Constant
 hi link cssUIAttr Constant
@@ -202,8 +208,19 @@ hi link cssFontProp PastelCyan
 hi link cssFontDescriptionProp PastelCyan
 hi link cssTextProp PastelCyan
 hi link cssBoxProp PastelVioletMagenta
-hi link cssRenderProp PastelRed
+hi link cssRenderProp PastelCyanBlue
 hi link cssColorProp PastelYellow
 hi link cssUIProp PastelMagenta
 
+"Diff
+hi DiffAdd guifg=#A2D39C guibg=#000000
+hi DiffDelete guifg=#F6989D guibg=#000000
+hi DiffText guifg=#F7977A guibg=#303030
+hi DiffChange guifg=#FFFFFF guibg=#303030
 
+"Diff whamoo
+"hi DiffAdd guibg=#3b7241
+"hi DiffDelete guifg=#262626 guibg=#933e3e
+"hi DiffText guifg=#262626 guibg=#233a5f
+"hi DiffChange guifg=#262626 guibg=#546b91
+"

@@ -1,5 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/users/korvin/.vim/.git'
-let g:netrw_dirhist_2='/Users/korvin'
-let g:netrw_dirhist_3='/Users/korvin/prj/web/UMA/.git'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/Users/korvin/prj/mac/bear/Bear'
