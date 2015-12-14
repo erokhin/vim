@@ -170,6 +170,12 @@ let g:startify_files_number = 5
 let g:startify_change_to_dir = 1 " When opening a file or bookmark, change to its directory.
 let g:startify_custom_header = map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
 
+" AG integration
+set runtimepath^=~/.vim/bundle/ag
+
+" Gundo
+nnoremap <leader>u :GundoToggle<CR>
+
 " Setting omnicompletion behaviour
 " http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 " set completeopt=longest,menuone
@@ -454,6 +460,8 @@ nmap <silent> <leader>s :set nolist!<CR>
 
 nmap <leader>p :execute 'NERDTreeToggle ' . getcwd()<CR>
 nmap <leader>h :call HexHighlight()<CR>
+
+nmap <leader>a :call SyntaxAttr()<CR>
 
 " mapping <leader>e whith current path expansion
 nnoremap <leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
