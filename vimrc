@@ -1,5 +1,4 @@
-" Konstantin V. Erokhin vimrc file 
-
+" ===================================
 " Plugin I'm using: 
 " ls /bundle/
 
@@ -9,6 +8,10 @@ call pathogen#helptags()
 " vim-airline > statusline
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
+" let g:airline_symbols.branch = '⎇'
+let g:airline_extensions = []
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " Syntax  
 syntax on
@@ -26,7 +29,6 @@ set ch=2                        " Make command line two lines high
 set mousehide                   " Hide the mouse when typing text
 set showcmd                     " Show partial command in status bar
 set nocompatible                " allow breaking vanilla vi compatibility
-set showmatch                   " Highlight the matches of the last search
 set backspace=2                 " allow backspacing over everything in insert mode
 set autoindent                  " always set autoindenting on
 set textwidth=0                 " Don't wrap words by default
@@ -38,6 +40,10 @@ set undodir=~/.vim/undodir
 set undofile
 set autochdir                   " automatically switch working path to the edited file
 set sessionoptions=blank,buffers,curdir,folds,help,options,tabpages,winsize,resize
+
+" set relativenumber              " showing the relative line number instead of the absolute one
+
+set modelines=0                 " preventing http://lists.alioth.debian.org/pipermail/pkg-vim-maintainers/2007-June/004020.html
 
 " Splitting
 set splitbelow                  " Split windows at bottom
@@ -57,7 +63,15 @@ set magic
 " Search setting
 set hlsearch                    " Highlith search result
 set incsearch                   " Enable incremental searching by default
+set showmatch                   " Highlight the matches of the last search
 set ignorecase                  " Ignore case-sensitive
+set smartcase                   " If there is an uppercase the search become case-sensitive
+set gdefault                    " Replaces globally without 'g'
+
+" remapping the tab to % because more easier to type
+nnoremap <leader><space> :noh<cr>
+nnoremap <tab> %
+vnoremap <tab> %
 
 " vim tab (for multiple file)
 " map <leader>tn :tabnew<cr>
@@ -99,8 +113,8 @@ set nobackup
 "set directory=~/.vim/tmp
 
 "" Took from http://amix.dk/blog/post/19486#The-ultimate-vim-configuration-vimrc
-" Set 10 lines to the curors - when moving vertical..
-set so=15
+" Set 7 lines to the curors - when moving vertical..
+set so=7
 " The commandbar height
 set cmdheight=2
 "Auto indent
@@ -109,6 +123,12 @@ set ai
 set si
 "Wrap lines
 set wrap
+set colorcolumn=85
+
+" Saving the file when losing focus
+" commented because it tries to save any buffer (even the ones without a name
+" provided generating errors)
+" au FocusLost * :wa
 
 " % matching also on if, else, ifelse, etc..
 " runtime macros/matchit.vim
@@ -374,7 +394,14 @@ let g:session_autoload = 'no'
 " Code completion using YouCompleteMe and omnifunc
 " https://github.com/Valloric/YouCompleteMe
 set omnifunc=syntaxcomplete#Complete
-let g:ycm_semantic_triggers.php = ['re!.', '->', '::']
+
+" The following lines do not work
+" " Default semantic triggers are in python/ycm/completers/completer.py, these
+" " just append new triggers to the default dict.
+" let g:ycm_semantic_triggers =
+"     \ get( g:, 'ycm_semantic_triggers', {} )
+" let g:ycm_semantic_triggers.php = ['arr', 're!.+', '->', '::']
+
 " That will ensure all completions will be presented, but might cause stuttering and lagginess if the omnifunc is slow
 let g:ycm_cache_omnifunc = 0
 
@@ -434,16 +461,26 @@ nmap  <leader>i :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
      \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
      \ . ">"<CR>
 
-" Navigate tabs with cmd-1, cmd-2, etc [insert mode]
-map! <D-1> <C-O>:tabn 1<CR>
-map! <D-2> <C-O>:tabn 2<CR>
-map! <D-3> <C-O>:tabn 3<CR>
-map! <D-4> <C-O>:tabn 4<CR>
-map! <D-5> <C-O>:tabn 5<CR>
-map! <D-6> <C-O>:tabn 6<CR>
-map! <D-7> <C-O>:tabn 7<CR>
-map! <D-8> <C-O>:tabn 8<CR>
-map! <D-9> <C-O>:tabn 9<CR>
+" Navigate tabs with cmd-1, cmd-2, etc [all modes]
+" map <D-1> <C-O>:tabn 1<CR>
+" map <D-2> <C-O>:tabn 2<CR>
+" map <D-3> <C-O>:tabn 3<CR>
+" map <D-4> <C-O>:tabn 4<CR>
+" map <D-5> <C-O>:tabn 5<CR>
+" map <D-6> <C-O>:tabn 6<CR>
+" map <D-7> <C-O>:tabn 7<CR>
+" map <D-8> <C-O>:tabn 8<CR>
+" map <D-9> <C-O>:tabn 9<CR>
+
+map <D-1> 1gt
+map <D-2> 2gt
+map <D-3> 3gt
+map <D-4> 4gt
+map <D-5> 5gt
+map <D-6> 6gt
+map <D-7> 7gt
+map <D-8> 8gt
+map <D-9> 9gt
 
 " Remapping the ESC key (app.net @ianpaul)
 inoremap jk <Esc>
@@ -455,3 +492,15 @@ if !hasmapto('<Plug>Commentary') || maparg('\\','n') ==# '' && maparg('\','n') =
   nmap <leader>cc <Plug>CommentaryLine
   nmap <leader>cu <Plug>CommentaryUndo
 endif
+
+" Disabling the arrow keys in the normal mode
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+nnoremap j gj
+nnoremap k gk

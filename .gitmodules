@@ -1,9 +1,0 @@
-[submodule "bundle/AutoComplPop"]
-	path = bundle/AutoComplPop
-	url = https://github.com/vim-scripts/AutoComplPop.git
-[submodule "bundle/hexHighlight/plugin"]
-	path = bundle/hexHighlight/plugin
-	url = https://github.com/EmmanuelOga/hexHighlight.git
-[submodule "/Users/korvin/.vim/bundle/vim-pony"]
-	path = /Users/korvin/.vim/bundle/vim-pony
-	url = git://github.com/rainerborene/vim-pony.git
