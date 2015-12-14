@@ -125,6 +125,18 @@ set si
 set wrap
 set colorcolumn=85
 
+" quickly open the ~/.vimrc file in a vertically split window
+nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+
+" open a new vertical split and switch over to it
+nnoremap <leader>w <C-w>v<C-w>l
+
+" commands needed to move around your splits
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 " Saving the file when losing focus
 " commented because it tries to save any buffer (even the ones without a name
 " provided generating errors)
@@ -149,6 +161,14 @@ set colorcolumn=85
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '\.DS_Store'] " '\.vim$'
 let NERDTreeShowBookmarks=1
 let NERDTreeChDirMode=2
+
+" Startify options
+let g:startify_session_dir = '~/.vim/sessions'
+let g:startify_list_order = ['bookmarks', 'files', 'dir', 'sessions']
+let g:startify_bookmarks = [ {'v': '~/.vim/vimrc'} ]
+let g:startify_files_number = 5
+let g:startify_change_to_dir = 1 " When opening a file or bookmark, change to its directory.
+let g:startify_custom_header = map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
 
 " Setting omnicompletion behaviour
 " http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
@@ -256,7 +276,7 @@ if has('gui_running')
         set nomacatsui
     endif
 
-    set lines=88
+    set lines=66
     set columns=272
     set anti
     " Removing due to Lion slowing
