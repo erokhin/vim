@@ -31,3 +31,6 @@
 [submodule "bundle/SyntaxAttr.vim"]
 	path = bundle/SyntaxAttr.vim
 	url = https://github.com/vim-scripts/SyntaxAttr.vim
+[submodule "bundle/hexHighlight.vim"]
+	path = bundle/hexHighlight.vim
+	url = https://github.com/vim-scripts/hexHighlight.vim
