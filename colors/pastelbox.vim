@@ -4,6 +4,9 @@
 " Version: 0.3
 "
 " Changelog:
+"
+" Todo:
+"   - create a 16 color version asap
 
 set background=dark
 
