@@ -99,8 +99,9 @@ set number                      " Set line number
 
 
 " Backup file and swapfiles
-set dir=~/.vimSwap
 set nobackup
+set noswapfile
+" set dir=~/.vimSwap
 " set backupdir=~/.vim/backup
 " set directory=~/.vim/tmp
 
@@ -111,6 +112,9 @@ set ai                      " Auto indent
 set si                      " Smart indet
 set wrap                    " Wrap lines
 set colorcolumn=85
+
+" edited files will be automatically loaded on focus
+set autoread
 
 " quickly open the ~/.vimrc file in a vertically split window
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
@@ -303,3 +307,8 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
+
+" Use | and _ to split windows (while preserving original behaviour of [count]bar and [count]_).
+nnoremap <expr><silent> <Bar> v:count == 0 ? "<C-W>v<C-W><Right>" : ":<C-U>normal! 0".v:count."<Bar><CR>"
+nnoremap <expr><silent> _     v:count == 0 ? "<C-W>s<C-W><Down>"  : ":<C-U>normal! ".v:count."_<CR>"
+
